@@ -4,7 +4,7 @@ from src.lab3.sudoku import group, get_row, get_col, get_block, read_sudoku
 import sys
 sys.path.append('c:/Users/FPT 2633/cs102/src')
 import os
-print(os.getcwd()) 
+print(os.getcwd())
 
 def read_puzzle(file_path: str) -> list:
     path = (pathlib.Path(__file__).parent / f'../../src/lab3/{file_path}')
@@ -21,16 +21,41 @@ class SudokuTestCase(unittest.TestCase):
         self.assertEqual(get_row(grid, (0, 0)), ['5', '3', '.', '.', '7', '.', '.', '.', '.'])
         self.assertEqual(get_row(grid, (1, 0)), ['6', '.', '.', '1', '9', '5', '.', '.', '.'])
 
+        grid = read_puzzle('puzzle2.txt')
+        self.assertEqual(get_row(grid, (0, 0)), ['.', '9', '4', '.', '.', '.', '1', '3', '.'])
+        self.assertEqual(get_row(grid, (1, 0)), ['.', '.', '.', '.', '.', '.', '.', '.', '.'])
+
+        grid = read_puzzle('puzzle3.txt')
+        self.assertEqual(get_row(grid, (0, 0)), ['8', '.', '.', '4', '.', '6', '.', '.', '7'])
+        self.assertEqual(get_row(grid, (1, 0)), ['.', '.', '.', '.', '.', '.', '4', '.', '.'])
+
     def test_get_col(self):
+        grid = read_puzzle('puzzle1.txt')
+        self.assertEqual(get_col(grid, (0, 0)), ['5', '6', '.', '8', '4', '7', '.', '.', '.'])
+        self.assertEqual(get_col(grid, (0, 1)), ['3', '.', '9', '.', '.', '.', '6', '.', '.'])
+
         grid = read_puzzle('puzzle2.txt')
         self.assertEqual(get_col(grid, (0, 0)), ['.', '.', '.', '.', '.', '.', '.', '.', '.'])
         self.assertEqual(get_col(grid, (0, 1)), ['9', '.', '.', '8', '3', '.', '.', '.', '.'])
 
+        grid = read_puzzle('puzzle3.txt')
+        self.assertEqual(get_col(grid, (0, 0)), ['8', '.', '.', '5', '.', '.', '.', '.', '3'])
+        self.assertEqual(get_col(grid, (0, 1)), ['.', '.', '1', '.', '.', '4', '5', '.', '.'])
+
     def test_get_block(self):
+        grid = read_puzzle('puzzle1.txt')
+        self.assertEqual(get_block(grid, (0, 1)), ['5', '3', '.', '6', '.', '.', '.', '9', '8'])
+        self.assertEqual(get_block(grid, (4, 7)), ['.', '.', '3', '.', '.', '1', '.', '.', '6'])
+
+        grid = read_puzzle('puzzle2.txt')
+        self.assertEqual(get_block(grid, (0, 1)), ['.', '9', '4', '.', '.', '.', '.', '.', '.'])
+        self.assertEqual(get_block(grid, (4, 7)), ['.', '.', '.', '.', '.', '.', '.', '6', '.'])
+
         grid = read_puzzle('puzzle3.txt')
         self.assertEqual(get_block(grid, (0, 1)), ['8', '.', '.', '.', '.', '.', '.', '1', '.'])
         self.assertEqual(get_block(grid, (4, 7)), ['7', '8', '.', '.', '.', '.', '1', '.', '3'])
 
 if __name__ == "__main__":
     unittest.main()
+
 
